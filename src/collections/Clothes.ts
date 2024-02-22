@@ -9,35 +9,41 @@ const Clothes :CollectionConfig = {
     },
     fields:[
         {
-            name:"Name",
-            type:"text"
+            name:"name",
+            type:"text",
+            label : "Name"
         },
         {
             name:"slug",
             type:"text",
             unique:true,
+            label:"Slug"
         },
 
         {
-            name : "Description",
-            type : "textarea"   
+            name : "description",
+            type : "textarea",   
+            label : "Description"
         },
         {
-            name: 'Cover_Image', 
+            name: 'cover_image', 
             type: 'upload',
             relationTo: "users",
+            label: 'Cover Image',
         },
 
         {
-            name:"Images",
+            name:"images",
             type:"array",
+            label:"Images",
             minRows:1,
             maxRows:100,
             fields:[
                 {
-                    name:"Image",
+                    name:"image",
                     type:"upload",
-                    relationTo:"users"
+                    relationTo:"users",
+                    label:"Image"
                 }
             ]
         }
