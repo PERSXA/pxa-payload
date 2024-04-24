@@ -1,8 +1,8 @@
 import { CollectionConfig } from "payload/types";
 
 
-const Clothes :CollectionConfig = {
-    slug:"clothes",
+const Cloth :CollectionConfig = {
+    slug:"cloth",
 
     access:{
         read:({req})=>true
@@ -19,16 +19,22 @@ const Clothes :CollectionConfig = {
             unique:true,
             label:"Slug"
         },
-
+        
         {
-            name : "description",
-            type : "textarea",   
-            label : "Description"
+            name:"notes",
+            type:"text",
+            label:"Notes"
         },
+        {
+            name:"hash",
+            type:"text",
+            label:"Hash"
+        },
+
         {
             name: 'cover_image', 
             type: 'upload',
-            relationTo: "users",
+            relationTo: "media",
             label: 'Cover Image',
         },
 
@@ -37,18 +43,17 @@ const Clothes :CollectionConfig = {
             type:"array",
             label:"Images",
             minRows:1,
-            maxRows:100,
+            maxRows:10,
             fields:[
                 {
                     name:"image",
                     type:"upload",
-                    relationTo:"users",
+                    relationTo:"media",
                     label:"Image"
                 }
             ]
         }
-        
     ]
 
 }
-export default Clothes
+export default Cloth
