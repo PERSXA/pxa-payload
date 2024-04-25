@@ -7,41 +7,36 @@ const ClothesCollection :CollectionConfig = {
     access:{
         read:({req})=>true
     },
+    admin:{
+        listSearchableFields:["name","slug"],
+        useAsTitle:"name"
+    },
     fields:[
         {
-            name:"Name",
-            type:"text"
+            name:"name",
+            type:"text",
+            label : "Name",
         },
         {
             name:"slug",
             type:"text",
             unique:true,
+            label:"Slug"
         },
 
         {
-            name : "Description",
+            name : "description",
+            label : "Description",
             type : "textarea"   
         },
         {
-            name: 'Cover_Image', 
+            name: 'coverImage', 
+            label: 'Cover Image',
             type: 'upload',
             relationTo: "users",
         },
 
-        {
-            name:"Images",
-            type:"array",
-            minRows:1,
-            maxRows:100,
-            fields:[
-                {
-                    name:"Image",
-                    type:"upload",
-                    relationTo:"users"
-                }
-            ]
-        }
-        
+              
     ]
 
 }

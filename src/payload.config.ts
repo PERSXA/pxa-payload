@@ -17,6 +17,7 @@ import { getGenerateURL } from './adapters/generateFileUrl'
 import Media  from './collections/Media'
 import Cloth from './collections/Cloth'
 import ClothesCollection from './collections/Collection'
+import Carousel from './collections/carousel'
 
 
 
@@ -52,14 +53,14 @@ if (process.env.R2_ENDPOINT != "") {
 
 // }
 export default buildConfig({
-  admin: {
+  admin: {  
     user: Users.slug,
     bundler: webpackBundler(),
   },
   editor: lexicalEditor({}),
  cors:"*", 
 
-  collections: [Users,Cloth,ClothesCollection,Media],
+  collections: [Users,Cloth,ClothesCollection,Media, Carousel],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },

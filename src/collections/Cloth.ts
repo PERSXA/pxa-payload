@@ -7,11 +7,22 @@ const Cloth :CollectionConfig = {
     access:{
         read:({req})=>true
     },
+    admin:{
+        listSearchableFields:["name","slug"],
+        useAsTitle:"name"
+    },
     fields:[
         {
             name:"name",
             type:"text",
-            label : "Name"
+            label : "Name",
+            defaultValue:"Cloth"
+        },
+        {
+            name:"clothesCollection",
+            type:"relationship",
+            relationTo:"clothescollection",
+            label:"Collection"
         },
         {
             name:"slug",

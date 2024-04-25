@@ -12,6 +12,7 @@ export interface Config {
     cloth: Cloth;
     clothescollection: Clothescollection;
     media: Media;
+    Carousel: Carousel;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -41,6 +42,7 @@ export interface User {
 export interface Cloth {
   id: string;
   name?: string | null;
+  clothesCollection?: (string | null) | Clothescollection;
   slug?: string | null;
   notes?: string | null;
   hash?: string | null;
@@ -51,6 +53,19 @@ export interface Cloth {
         id?: string | null;
       }[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clothescollection".
+ */
+export interface Clothescollection {
+  id: string;
+  name?: string | null;
+  slug?: string | null;
+  description?: string | null;
+  coverImage?: string | User | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -72,20 +87,14 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "clothescollection".
+ * via the `definition` "Carousel".
  */
-export interface Clothescollection {
+export interface Carousel {
   id: string;
-  Name?: string | null;
-  slug?: string | null;
-  Description?: string | null;
-  Cover_Image?: string | User | null;
-  Images?:
-    | {
-        Image?: string | User | null;
-        id?: string | null;
-      }[]
-    | null;
+  covermedia?: string | Media | null;
+  title?: string | null;
+  link?: string | null;
+  description?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -127,72 +136,4 @@ export interface PayloadMigration {
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}
-}
-
-
-/// <reference types="node" />
-import type { NextFunction, Response } from 'express';
-import type { TypeWithID } from 'payload/dist/collections/config/types';
-import type { FileData, ImageSize } from 'payload/dist/uploads/types';
-import type { CollectionConfig, PayloadRequest } from 'payload/types';
-export interface File {
-    buffer: Buffer;
-    filename: string;
-    filesize: number;
-    mimeType: string;
-    tempFilePath?: string;
-}
-export type HandleUpload = (args: {
-    collection: CollectionConfig;
-    req: PayloadRequest;
-    data: any;
-    file: File;
-}) => Promise<void> | void;
-export interface TypeWithPrefix {
-    prefix?: string;
-}
-export type HandleDelete = (args: {
-    collection: CollectionConfig;
-    req: PayloadRequest;
-    doc: TypeWithID & FileData & TypeWithPrefix;
-    filename: string;
-}) => Promise<void> | void;
-export type GenerateURL = (args: {
-    filename: string;
-    collection: CollectionConfig;
-    prefix?: string;
-}) => string | Promise<string>;
-export type StaticHandler = (req: PayloadRequest, res: Response, next: NextFunction) => Promise<unknown> | unknown;
-export interface GeneratedAdapter {
-    handleUpload: HandleUpload;
-    handleDelete: HandleDelete;
-    generateURL: GenerateURL;
-    staticHandler: StaticHandler;
-    onInit?: () => void;
-}
-export type Adapter = (args: {
-    collection: CollectionConfig;
-    prefix?: string;
-}) => GeneratedAdapter;
-export type GenerateFileURL = (args: {
-    collection: CollectionConfig;
-    filename: string;
-    prefix?: string;
-    size?: ImageSize;
-}) => Promise<string> | string;
-export interface CollectionOptions {
-    disableLocalStorage?: boolean;
-    disablePayloadAccessControl?: true;
-    generateFileURL?: GenerateFileURL;
-    prefix?: string;
-    adapter: Adapter | null;
-}
-export interface PluginOptions {
-    /**
-     * Whether or not to enable the plugin
-     *
-     * Default: true
-     */
-    enabled?: boolean;
-    collections: Record<string, CollectionOptions>;
 }
