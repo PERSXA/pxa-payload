@@ -1,43 +1,44 @@
 import { CollectionConfig } from "payload/types";
 
 
-const ClothesCollection :CollectionConfig = {
-    slug:"clothescollection",
+const ClothesCollection: CollectionConfig = {
+  slug: "clothescollection",
 
-    access:{
-        read:({req})=>true
+  access: {
+    read: ({ req }) => true,
+  },
+  admin: {
+    listSearchableFields: ["name", "slug"],
+    useAsTitle: "name",
+  },
+  fields: [
+    {
+      name: "name",
+      type: "text",
+      label: "Name",
     },
-    admin:{
-        listSearchableFields:["name","slug"],
-        useAsTitle:"name"
+    {
+      name: "slug",
+      type: "text",
+      unique: true,
+      label: "Slug",
     },
-    fields:[
-        {
-            name:"name",
-            type:"text",
-            label : "Name",
-        },
-        {
-            name:"slug",
-            type:"text",
-            unique:true,
-            label:"Slug"
-        },
-
-        {
-            name : "description",
-            label : "Description",
-            type : "textarea"   
-        },
-        {
-            name: 'coverImage', 
-            label: 'Cover Image',
-            type: 'upload',
-            relationTo: "users",
-        },
-
-              
-    ]
-
-}
+    {
+      name: "cover_image",
+      type: "upload",
+      relationTo: "media",
+      label: "Cover Image",
+    },
+    {
+      name: "description",
+      label: "Description",
+      type: "textarea",
+    },
+    {
+      name: 'short_description',
+      type: 'text',
+      label:'Short Desciption'
+    }
+  ],
+};
 export default ClothesCollection

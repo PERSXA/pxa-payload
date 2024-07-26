@@ -16,7 +16,7 @@ const start = async () => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
     },
   })
-  app.listen(5000)
+  app.listen(5002)
 }
 
 start()
