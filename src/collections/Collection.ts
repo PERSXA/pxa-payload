@@ -24,21 +24,21 @@ const ClothesCollection: CollectionConfig = {
       label: "Slug",
     },
     {
-      name: "cover_image",
-      type: "upload",
-      relationTo: "media",
-      label: "Cover Image",
-    },
-    {
       name: "description",
       label: "Description",
       type: "textarea",
     },
     {
-      name: 'short_description',
-      type: 'text',
-      label:'Short Desciption'
-    }
+      name: "short_description",
+      type: "text",
+      label: "Short Desciption",
+    },
+    {
+      name: "cover_image",
+      type: "upload",
+      relationTo: "media",
+      label: "Cover Image",
+    },
   ],
 };
 export default ClothesCollection

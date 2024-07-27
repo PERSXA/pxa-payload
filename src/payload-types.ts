@@ -65,7 +65,8 @@ export interface Clothescollection {
   name?: string | null;
   slug?: string | null;
   description?: string | null;
-  coverImage?: string | User | null;
+  short_description?: string | null;
+  cover_image?: string | Media | null;
   updatedAt: string;
   createdAt: string;
 }
